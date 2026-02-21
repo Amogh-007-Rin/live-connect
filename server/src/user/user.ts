@@ -3,6 +3,7 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import { user } from '../database/db.js';
 import { SinginSchema, SignupSchema } from "../types/types.js"
+import { verifyData } from "../tests/test.db.js";
 const router = Router()
 
 router.use(express.json())
@@ -81,4 +82,9 @@ router.get("/health", function (req: Request, res: Response) {
     res.status(200).json({ message: "user-router is responding" })
 });
 
+router.get("/count", async function(req: Request, res: Response){
+    const count = verifyData();
+    res.status(200).json({userCount : count})
+
+})
 export default router;
